@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                <div class="justify-content-center">
+                    <h1>Изменить автобус</h1>
+                </div>
+                <form th:action="@{/bus/{id}/edit(id=${form.id})}"
+                      th:method="post"
+                      th:object="${form}"
+                      class="m-md-auto w-50 pb-3">
+
+                    <input th:field="*{id}"
+                           type="hidden"
+                           class="form-control text-center"
+                           id="id"/>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="mark">Марка</label>
+                        <input th:field="*{mark}"
+                               th:errorclass="is-invalid"
+                               type="text"
+                               class="form-control text-center"
+                               id="mark"/>
+                        <small th:if="${#fields.hasErrors('mark')}"
+                               th:errors="*{mark}"
+                               class="text-danger">Error message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="numberBus">Номер автобуса</label>
+                        <input th:field="*{numberBus}"
+                               th:errorclass="is-invalid"
+                               type="text"
+                               class="form-control text-center"
+                               id="numberBus"/>
+                        <small th:if="${#fields.hasErrors('numberBus')}"
+                               th:errors="*{numberBus}"
+                               class="text-danger">Error message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="numberSeats">Количество мест</label>
+                        <input th:field="*{numberSeats}"
+                               th:errorclass="is-invalid"
+                               type="number"
+                               class="form-control text-center"
+                               id="numberSeats"/>
+                        <small th:if="${#fields.hasErrors('numberSeats')}"
+                               th:errors="*{numberSeats}"
+                               class="text-danger">Error message</small>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label" for="classBus">Класс автобуса</label>
+                        <input th:field="*{classBus}"
+                               th:errorclass="is-invalid"
+                               type="text"
+                               class="form-control text-center"
+                               id="classBus"/>
+                        <small th:if="${#fields.hasErrors('classBus')}"
+                               th:errors="*{classBus}"
+                               class="text-danger">Error message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="year">Год выпуска</label>
+                        <input th:field="*{year}"
+                               th:errorclass="is-invalid"
+                               type="date"
+                               min="1800"
+                               class="form-control text-center"
+                               id="year"/>
+                        <small th:if="${#fields.hasErrors('year')}"
+                               th:errors="*{year}"
+                               class="text-danger">Error message</small>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Изменить автобус</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-2"></div>
+      <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+
+        <div class="justify-content-center">
+          <h1>Оформление билета</h1>
+          <h2 th:text="'Тур: ' + ${model.tour.nameTour}">Название тура</h2>
+        </div>
+
+          <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+              <span th:text="${errorMessage}"></span>
+          </div>
+
+        <form th:action="@{/ticket/create/{id}(id=${model.tour.id})}"
+              th:method="post"
+              th:object="${form}"
+              class="m-md-auto w-50 pb-3">
+
+
+
+
+
+          <div class="mb-3">
+            <label class="form-label" for="tripId">Дата заезда</label>
+            <select th:field="*{tripId}" class="form-select text-center" id="tripId">
+              <option value="" disabled selected>Выберите дату заезда</option>
+              <option th:each="trip : ${model.trips}"
+                      th:value="${trip.id}"
+                      th:text="'Рейс: '  + ${trip.startDate}+ ' - ' + ${trip.endDate}"></option>
+            </select>
+            <small th:if="${#fields.hasErrors('tripId')}" th:errors="*{tripId}" class="text-danger">Error message</small>
+          </div>
+
+
+
+
+
+          <div class="mb-3">
+            <label class="form-label" for="surname">Фамилия</label>
+            <input th:field="*{surname}"
+                   th:errorclass="is-invalid"
+                   type="text"
+                   class="form-control text-center"
+                   id="surname"/>
+            <small th:if="${#fields.hasErrors('surname')}"
+                   th:errors="*{surname}"
+                   class="text-danger">Error message</small>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="name">Имя</label>
+            <input th:field="*{name}"
+                   th:errorclass="is-invalid"
+                   type="text"
+                   class="form-control text-center"
+                   id="name"/>
+            <small th:if="${#fields.hasErrors('name')}"
+                   th:errors="*{name}"
+                   class="text-danger">Error message</small>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="patronymic">Отчество</label>
+            <input th:field="*{patronymic}"
+                   th:errorclass="is-invalid"
+                   type="text"
+                   class="form-control text-center"
+                   id="patronymic"/>
+            <small th:if="${#fields.hasErrors('patronymic')}"
+                   th:errors="*{patronymic}"
+                   class="text-danger">Error message</small>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="birthday">Дата рождения</label>
+            <input th:field="*{birthday}"
+                   th:errorclass="is-invalid"
+                   type="date"
+                   class="form-control text-center"
+                   id="birthday"/>
+            <small th:if="${#fields.hasErrors('birthday')}"
+                   th:errors="*{birthday}"
+                   class="text-danger">Error message</small>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="identificationDocument">Паспорт</label>
+            <input th:field="*{identificationDocument}"
+                   th:errorclass="is-invalid"
+                   type="text"
+                   class="form-control text-center"
+                   id="identificationDocument"/>
+            <small th:if="${#fields.hasErrors('identificationDocument')}"
+                   th:errors="*{identificationDocument}"
+                   class="text-danger">Error message</small>
+          </div>
+
+
+          <div class="mb-3">
+            <label class="form-label" for="telephone">Телефон</label>
+            <input th:field="*{telephone}"
+                   th:errorclass="is-invalid"
+                   type="tel"
+                   class="form-control text-center"
+                   id="telephone"/>
+            <small th:if="${#fields.hasErrors('telephone')}"
+                   th:errors="*{telephone}"
+                   class="text-danger">Error message</small>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="email">Почта</label>
+            <input th:field="*{email}"
+                   th:errorclass="is-invalid"
+                   type="email"
+                   class="form-control text-center"
+                   id="email"/>
+            <small th:if="${#fields.hasErrors('email')}"
+                   th:errors="*{email}"
+                   class="text-danger">Error message</small>
+          </div>
+
+
+          <div th:each="tour : ${model.tour}"
+               class="d-flex flex-column bg-text mb-3 p-3 border rounded">
+            <h2 th:text="'Цена: ' + ${tour.price}">Цена тура</h2>
+          </div>
+
+
+
+          <button type="submit" class="btn btn-primary">Оформить билет</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

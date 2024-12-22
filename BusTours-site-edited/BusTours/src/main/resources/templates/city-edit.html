@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                <div class="justify-content-center">
+                    <h1>Изменить город</h1>
+                </div>
+                <form th:action="@{/city/{id}/edit(id=${form.id})}"
+                      th:method="post"
+                      th:object="${form}"
+                      class="m-md-auto w-50 pb-3">
+
+                    <input th:field="*{id}"
+                           type="hidden"
+                           class="form-control text-center"
+                           id="id"/>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="nameCity">Название города</label>
+                        <input th:field="*{nameCity}"
+                               th:errorclass="is-invalid"
+                               type="text"
+                               class="form-control text-center"
+                               id="nameCity"/>
+                        <small th:if="${#fields.hasErrors('nameCity')}"
+                               th:errors="*{nameCity}"
+                               class="text-danger">Error message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="description">Описание</label>
+                        <textarea th:field="*{description}"
+                                  th:errorclass="is-invalid"
+                                  class="form-control"
+                                  id="description" rows="5" required></textarea>
+                        <small th:if="${#fields.hasErrors('description')}"
+                               th:errors="*{description}"
+                               class="text-danger">Error message</small>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-secondary">Изменить город</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

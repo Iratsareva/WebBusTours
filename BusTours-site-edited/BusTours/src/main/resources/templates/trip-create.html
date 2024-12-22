@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-2"></div>
+      <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+
+        <div class="justify-content-center">
+          <h1>Добавить рейс</h1>
+        </div>
+        <form th:action="@{/trip/create/{id}(id=${model.tour.id})}"
+              th:method="post"
+              th:object="${form}"
+              class="m-md-auto w-50 pb-3">
+
+
+
+
+            <div class="mb-3">
+                <label class="form-label" for="tourId">Тур</label>
+                <input type="text"
+                       class="form-control text-center"
+                       id="tourName"
+                       th:value="${model.tour.nameTour}"
+                       readonly/>
+                <input th:field="*{tourId}"
+                       type="hidden"
+                       id="tourId" />
+                <small th:if="${#fields.hasErrors('tourId')}"
+                       th:errors="*{tourId}"
+                       class="text-danger">Error message</small>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="busId">ID автобуса</label>
+                <select th:field="*{busId}" class="form-select text-center" id="busId">
+                    <option value="" disabled selected>Выберите автобус</option>
+                    <option th:each="bus : ${model.buses}"
+                            th:value="${bus.id}"
+                            th:text=" ${bus.mark} + ' ' +  ${bus.numberBus}"></option>
+                </select>
+                <small th:if="${#fields.hasErrors('busId')}" th:errors="*{busId}" class="text-danger">Error message</small>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="driverId">ID водителя</label>
+                <select th:field="*{driverId}" class="form-select text-center" id="driverId">
+                    <option value="" disabled selected>Выберите водителя</option>
+                    <option th:each="driver : ${model.drivers}"
+                            th:value="${driver.id}"
+                            th:text="${driver.surname} + ' ' +  ${driver.name} + ' ' + ${driver.patronymic} "></option>
+                </select>
+                <small th:if="${#fields.hasErrors('driverId')}" th:errors="*{driverId}" class="text-danger">Error message</small>
+            </div>
+
+
+
+          <div class="mb-3">
+            <label class="form-label" for="startDate">Дата отправления</label>
+            <input th:field="*{startDate}"
+                   th:errorclass="is-invalid"
+                   type="date"
+                   class="form-control text-center"
+                   id="startDate"/>
+            <small th:if="${#fields.hasErrors('startDate')}"
+                   th:errors="*{startDate}"
+                   class="text-danger">Error message</small>
+          </div>
+
+
+          <div class="mb-3">
+            <label class="form-label" for="endDate">Дата прибытия</label>
+            <input th:field="*{endDate}"
+                   th:errorclass="is-invalid"
+                   type="date"
+                   class="form-control text-center"
+                   id="endDate"/>
+            <small th:if="${#fields.hasErrors('endDate')}"
+                   th:errors="*{endDate}"
+                   class="text-danger">Error message</small>
+          </div>
+
+
+
+          <button type="submit" class="btn btn-secondary">Создать рейс</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

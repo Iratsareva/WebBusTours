@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="jumbotron  rounded col-md-8 align-self-center pt-5">
+        <h2 class="text-center text-dark mt-5">Пассажиры</h2>
+
+
+        <div th:each="passenger : ${model.passengers}"
+             class="d-flex flex-column bg-text mb-3 p-3 border rounded">
+
+          <h4 th:text="'Фамилия : ' + ${passenger.surname}">Фамилия пассажира</h4>
+          <h4 th:text="'Имя: ' + ${passenger.name}">Имя пассажира</h4>
+          <h4 th:text="'Отчество: ' + ${passenger.patronymic}">Отчество пассажира</h4>
+          <h4 th:text="'Дата рождения: ' + ${passenger.birthday}">Дата рождения</h4>
+          <h4 th:text="'Паспорт: ' + ${passenger.identificationDocument}">Паспорт</h4>
+
+
+
+
+
+
+        </div>
+
+        <nav th:if="${model.totalPages > 1}" aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+            <li class="page-item"
+                th:each="pageNumber : ${#numbers.sequence(1, model.totalPages)}"
+                th:classappend="${pageNumber == form.page} ? 'active'">
+              <a class="page-link"
+                 th:href="@{/passenger(page=${pageNumber}, size=${form.size})}"
+                 th:text="${pageNumber}">1</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>
