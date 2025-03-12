@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <main class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
+
+        <div class="justify-content-center">
+          <h1>Информация о туре</h1>
+        </div>
+
+        <div class="row bg-light rounded" style="text-align: left; ">
+
+
+          <h2 style="font-weight: normal;" th:text="${model.tour.nameTour}"></h2>
+          <h4 style="font-weight: normal;" th:text="'Описание тура: ' + ${model.tour.description}"></h4>
+          <h4 style="font-weight: normal;" th:text="'Маршрут тура: ' + ${model.tour.itinerary}"></h4>
+          <h4 style="font-weight: normal;" th:text="'Продолжительность тура: ' + ${model.tour.lengthTour} + ' дня'"></h4>
+          <h4 style="font-weight: normal;" th:text="'Цена тура: ' + ${model.tour.price}"></h4>
+          <h4 style="font-weight: normal;" th:text="'Место назначения: ' + ${model.tour.destination}"></h4>
+          <h4 style="font-weight: normal;" th:text="'Даты заездов: ' + ${model.trips != null ? model.trips : 'Скоро появятся ...'}"></h4>
+
+
+
+
+
+
+
+        </div>
+      </main>
+    </div>
+  </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

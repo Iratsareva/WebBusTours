@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ошибка</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+</head>
+
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                <div class="error-message">
+                    <h1>Ошибка</h1>
+                    <h1 th:text="${message}">Error Message</h1>
+                </div>
+                <h1>
+                    <a  href="/" class="btn btn-secondary">На главную страницу</a>
+                </h1>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
+

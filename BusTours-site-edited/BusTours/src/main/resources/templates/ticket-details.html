@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <main class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
+        <div class="justify-content-center">
+          <h1>Информация о билете</h1>
+        </div>
+        <div class="row bg-light rounded">
+
+          <h4 th:text="'Тур: ' + ${model.tour.nameTour}"></h4>
+
+          <h4 th:text="'Пассажир: ' + ${model.passenger.surname} +' '+ ${model.passenger.name} +' '+ ${model.passenger.patronymic}"></h4>
+          <h4 th:text="'Рейс: ' +${model.trip.startDate}+' - ' + ${model.trip.endDate} "></h4>
+          <h4 th:text="'Автобус: ' + ${model.bus.mark} +' ' +${model.bus.numberBus}"></h4>
+          <h4 th:text="'Водитель: ' + ${model.driver.surname} + ' ' + ${model.driver.name} + ' ' + ${model.driver.patronymic}"></h4>
+
+        </div>
+      </main>
+    </div>
+  </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

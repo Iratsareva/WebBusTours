@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron  rounded col-md-8 align-self-center pt-5">
+                <h2 class="text-center text-dark mt-5">Автобусы</h2>
+
+                <div class="mt-4 d-flex justify-content-center">
+                    <a class="btn btn-success mb-3" th:href="@{/bus/create}">Добавить новый автобус</a>
+                </div>
+
+                    <div th:each="bus : ${model.buses}"
+                         class="d-flex flex-column bg-text mb-3 p-3 border rounded">
+                        <h2>
+                            <a th:href="@{/bus/{id}(id=${bus.id})}"
+                               th:text="${bus.mark} +' '+${bus.numberBus} " style="text-decoration: none; color: inherit;">Марка автобуса</a>
+                        </h2>
+
+                        <h4 th:text="'Количество мест: ' + ${bus.numberSeats}">Количество мест</h4>
+                        <h4 th:text="'Класс автобуса: ' + ${bus.classBus}">Класс автобуса</h4>
+                        <h4 th:text="'Год выпуска: ' + ${bus.year}">Год выпуска</h4>
+
+
+
+                        <div class="mt-2">
+                            <a class="btn btn-secondary"
+                               th:href="@{/bus/{id}(id=${bus.id})}">Подробнее</a>
+                            <a class="btn btn-primary"
+                               th:href="@{/bus/{id}/edit(id=${bus.id})}">Редактировать</a>
+                            <a class="btn btn-danger"
+                               th:href="@{/bus/{id}/delete(id=${bus.id})}"
+                               onclick="return confirm('Вы уверены, что хотите удалить этот автобус?');">Удалить</a>
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

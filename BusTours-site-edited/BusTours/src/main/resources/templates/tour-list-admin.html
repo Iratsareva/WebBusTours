@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="~{fragments/head}"/>
+<body class="d-flex flex-column h-100">
+
+
+<div th:replace="~{fragments/navbar}">Navbar</div>
+
+
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+        <h2 class="text-center text-dark mt-5">Туры</h2>
+
+        <div class="mt-4 d-flex justify-content-center" sec:authorize="hasRole('ADMIN')">
+          <a class="btn btn-success mb-3" th:href="@{/tour/create}">Добавить новый тур</a>
+        </div>
+
+        <div th:each="tour : ${model.toursShort}"
+             class="d-flex flex-column bg-text mb-3 p-3 border rounded" style="text-align: left;">
+          <h2>
+            <a th:href="@{/tour/{id}?source=admin(id=${tour.id})}" th:text="${tour.nameTour}" style="text-decoration: none; color: inherit;">Название тура</a>
+          </h2>
+
+
+          <h4 style="font-weight: normal;"  th:text="'Маршрут тура: ' + ${tour.itinerary}">Маршрут тура</h4>
+          <h4 style="font-weight: normal;"  th:text="'Продолжительность тура: ' + ${tour.lengthTour}+ ' дня'">Продолжительность тура</h4>
+          <h4 style="font-weight: normal;"  th:text="'Цена тура: ' + ${tour.price}">Цена тура</h4>
+
+
+          <div class="mt-2">
+            <a class="btn btn-secondary"
+               th:href="@{/tour/{id}?source=admin(id=${tour.id})}">Подробнее</a>
+            <a class="btn btn-primary" sec:authorize="hasRole('ADMIN')"
+               th:href="@{/tour/{id}/edit(id=${tour.id})}">Редактировать</a>
+            <a class="btn btn-primary" sec:authorize="hasRole('ADMIN')"
+               th:href="@{/trip/create/{id}(id=${tour.id})}">Добавить рейс</a>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<footer th:replace="~{fragments/footer}"/>
+</body>
+</html>

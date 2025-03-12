@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+
+      <main class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
+        <div class="justify-content-center">
+          <h1>Информация о пользователе</h1>
+        </div>
+
+
+
+        <div class="row bg-light rounded" style="text-align: left; ">
+
+          <div class="col-md-6" th:object="${passengerViewModel}">
+
+
+
+            <h4 th:text="'Фамилия: ' + ${passengerViewModel.surname}"></h4>
+            <h4 th:text="'Имя: ' + ${passengerViewModel.name}"></h4>
+            <h4 th:text="'Отчество: ' + ${passengerViewModel.patronymic}"></h4>
+            <h4 th:text="'Дата рождения: ' + ${passengerViewModel.birthday}"></h4>
+            <h4 th:text="'Паспорт: ' + ${passengerViewModel.identificationDocument}"></h4>
+            <h4 th:text="'Телефон: ' + ${passengerViewModel.telephone}"></h4>
+            <h4 th:text="'Почта: ' + ${passengerViewModel.email}"></h4>
+            <h4 th:text="'Логин: ' + ${passengerViewModel.login}"></h4>
+
+
+            <a class="btn btn-primary"
+               th:href="@{/users/edit}">Редактировать</a>
+
+          </div>
+        </div>
+
+
+      </main>
+    </div>
+  </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

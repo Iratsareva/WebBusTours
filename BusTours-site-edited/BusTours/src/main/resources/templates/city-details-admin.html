@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <main class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
+
+        <div class="row bg-light rounded">
+
+          <h2 th:text="${model.city.nameCity}"></h2>
+          <h4 style="font-weight: normal; text-align: left;" th:text="${model.city.description}"></h4>
+        </div>
+      </main>
+    </div>
+  </div>
+</main>
+
+
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+        <h4 class="text-center text-dark mt-5" th:text="'Туры в '+${model.city.nameCity}">Туры в город </h4>
+
+
+        <div th:each="tour : ${model.cityTours}"
+             class="d-flex flex-column bg-text mb-3 p-3 border rounded" style="text-align: left;">
+          <h2>
+            <a th:href="@{/tour/{id}?source=admin(id=${tour.id})}" th:text="${tour.nameTour}" style="text-decoration: none; color: inherit;"
+               onmouseover="this.style.color='#007BFF';"
+               onmouseout="this.style.color='inherit';"
+            >Название тура</a>
+          </h2>
+
+          <h4 style="font-weight: 550;">Маршрут тура:</h4>
+          <h4 style="font-weight: normal;" th:text="${tour.itinerary}">Маршрут тура</h4>
+
+
+          <h4 style="font-weight: 550;">Продолжительность тура:</h4>
+          <h4 style="font-weight: normal;" th:text="${tour.lengthTour} + ' дней'">Продолжительность тура</h4>
+
+
+          <h4 style="font-weight: 550;">Продолжительность тура:</h4>
+          <h4 style="font-weight: normal;" th:text="${tour.lengthTour} + ' дней'">Продолжительность тура</h4>
+
+
+          <h4 style="font-weight: 550;">Цена тура:</h4>
+          <h4 style="font-weight: normal;" th:text="${tour.price}">Цена тура</h4>
+
+        </div>
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

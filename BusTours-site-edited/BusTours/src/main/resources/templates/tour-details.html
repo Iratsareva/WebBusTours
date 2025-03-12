@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+
+<main class="flex-shrink-0">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+
+
+
+      <div class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
+
+        <div class="justify-content-center">
+          <h1>Информация о туре</h1>
+        </div>
+
+        <div class="row bg-light rounded" style="text-align: left; ">
+
+
+          <h2 style="font-weight: bold;" th:text="${model.tour.nameTour}"></h2>
+
+          <h4 style="font-weight: 550;">Описание тура:</h4>
+          <h4 style="font-weight: normal;" th:text="${model.tour.description}"></h4>
+
+          <h4 style="font-weight: 550;">Маршрут тура:</h4>
+          <h4 style="font-weight: normal;" th:text="${model.tour.itinerary}"></h4>
+
+          <h4 style="font-weight: 550;">Продолжительность тура:</h4>
+          <h4 style="font-weight: normal;" th:text="${model.tour.lengthTour} + ' дня'"></h4>
+
+          <h4 style="font-weight: 550;">Место назначения:</h4>
+          <h4 style="font-weight: normal;" th:text="${model.tour.destination}"></h4>
+
+          <h4 style="font-weight: 550;">Даты заездов:</h4>
+          <h4 style="font-weight: normal;" th:text="${model.trips != null ? model.trips : 'Скоро появятся ...'}"></h4>
+
+
+          <div class="d-flex justify-content-between align-items-center mt-2">
+            <h2 th:text="'Цена тура: ' + ${model.tour.price}">Цена тура</h2>
+
+            <div th:if="${model.trips != null}">
+            <a class="btn btn-orange mt-2" style="background-color: orange; color: white; font-size: 1.25rem; padding: 10px 20px;"
+               onmouseover="this.style.backgroundColor='darkorange'; this.style.color='black';"
+               onmouseout="this.style.backgroundColor='orange'; this.style.color='white';"
+
+               th:href="@{/ticket/create/{id}(id=${model.tour.id})}">Купить</a>
+
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+  </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

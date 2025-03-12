@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="jumbotron rounded col-md-8 align-self-center pt-5">
+        <h2 class="text-center text-dark mt-5">Города</h2>
+
+          <div class="mt-4 d-flex justify-content-center">
+              <a class="btn btn-success mb-3" th:href="@{/city/create}">Добавить новый город</a>
+          </div>
+
+        <div th:each="city : ${model.cityName}"
+             class="d-flex flex-column bg-text mb-3 p-3 border rounded">
+
+            <h2 th:text="'Город: ' + ${city.nameCity}">Название города</h2>
+            <h4 th:text="'Описание: ' + ${city.description}">Описание города</h4>
+
+
+          <div class="mt-2">
+            <a class="btn btn-secondary"
+               th:href="@{/city/{id}?source=admin(id=${city.id})}">Подробнее</a>
+            <a class="btn btn-primary"
+               th:href="@{/city/{id}/edit(id=${city.id})}">Редактировать</a>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>
